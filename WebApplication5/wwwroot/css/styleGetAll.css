@@ -1,0 +1,317 @@
+﻿body {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(30px);
+}
+
+.wrapper {
+    margin: 0 auto;
+    display: grid;
+    border-radius: 10px;
+    grid-template-columns: 56px 1fr;
+    padding-left: 0px;
+    padding-top: 50px;
+    /* Автоматическое размещение в колонку */
+    grid-auto-flow: column;
+    width: 96%;
+    margin-top: 30px;
+    grid-auto-flow: column;
+    height: 700px;
+}
+
+.button {
+    border: none;
+    border-radius: 8px;
+    height: 30px;
+    width: 60px;
+    background: linear-gradient( 268.35deg, rgba(255, 70, 70, 0.99) 3.47%, rgba(255, 114, 70, 0.99) 60.18% );
+    box-shadow: none;
+}
+
+.item {
+    height: 200px;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+.item2 {
+    height: 500px;
+}
+
+
+header::after {
+    display: inline-block;
+    width: 90%;
+    content: '';
+}
+
+header {
+    text-align: justify;
+    padding-left: 50px;
+    padding-right: 75px;
+    padding-top: 30px;
+}
+
+    header * {
+        display: inline-block;
+        width: 60px;
+    }
+
+
+.input {
+    background: rgba(0, 0, 0, 0.294);
+    border: 1px black solid;
+    border-radius: 5px;
+    padding-left: 25px;
+    display: inline-block;
+}
+
+.card {
+    height: 700px;
+    margin-right: 50px;
+    background: rgba(0, 0, 0, 0.32);
+    margin-bottom: 50px;
+    border-radius: 10px;
+    box-shadow: 15px 0px 15px 0px rgba(0, 0, 0, 0.356);
+    transition: 0.2s;
+}
+
+.item3 {
+    grid-row: span 2;
+    background: rgba(0, 0, 0, 0.294);
+    margin-bottom: 50px;
+    border-radius: 10px;
+    box-shadow: 15px 0px 15px 0px rgba(0, 0, 0, 0.151);
+    transition: 0.2s;
+}
+
+.elem {
+    margin-left: 0;
+    width: 300px;
+    height: 300px;
+    background: rgb(243, 147, 147);
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+    .elem:hover {
+        transform: scale(1.03);
+    }
+
+        .elem:hover .card {
+            transform: scale(1.03);
+        }
+
+.searchForm {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+    background: #8d8c8cd0;
+    border-radius: 3px;
+}
+
+.inputSearch {
+    width: 100%;
+    height: 35px;
+    padding-left: 15px;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+    .inputSearch::placeholder {
+        color: white;
+    }
+
+.searchButton {
+    height: 35px;
+    width: 42px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+    .searchButton::before {
+        font-size: 16px;
+        color: #a58c4c;
+    }
+
+.profile {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background: #8d8c8cd0;
+}
+
+.divs {
+    color: white;
+    display: inline-block;
+    width: 160px;
+}
+
+.table {
+    margin-top: 30px;
+    width: 90%;
+    background: rgba(0, 0, 0, 0.151);
+    margin-left: 5%;
+    margin-right: 5%;
+    align-items: center;
+    border-collapse: collapse;
+    border-radius: 10px 10px 0px 0px;
+    color: white;
+}
+
+th {
+    height: 50px;
+}
+
+td {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    margin-bottom: 5px;
+}
+
+tr {
+    height: 50px;
+    margin-top: 10px;
+}
+
+.main-header-nav {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    padding: 20px 0;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+    .main-header-nav .nav-item {
+        color: var(--theme-inactive-color);
+        text-decoration: none;
+        padding-bottom: 6px;
+        transition: 0.3s;
+        border-bottom: 1px solid transparent;
+        margin-right: 5px;
+    }
+
+        .main-header-nav .nav-item:hover {
+            color: #fff;
+        }
+
+        .main-header-nav .nav-item.active {
+            border-bottom: 1px solid #fff;
+            color: #fff;
+        }
+
+.main-header__add {
+    background-color: #ea4e34;
+    border: none;
+    color: #fff;
+    padding: 4px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-left: auto;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .main-header__add:hover {
+        background-color: #e4361a;
+    }
+
+    .main-header__add svg {
+        width: 20px;
+        height: 20px;
+    }
+
+.main-header__delete {
+    background-color: #ea4e34;
+    border: none;
+    color: #fff;
+    padding: 4px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-left: auto;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 10px;
+}
+
+    .main-header__delete:hover {
+        background-color: #e4361a;
+    }
+
+.main-header__edit {
+    background-color: #2ee064;
+    border: none;
+    color: #fff;
+    padding: 4px;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-left: auto;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 30px;
+}
+
+    .main-header__edit:hover {
+        background-color: #2aa31f;
+    }
+
+.app-sidebar {
+    padding: 40px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.app-sidebar {
+    padding: 160px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.app-sidebar-link {
+    color: var(--main-color);
+    color: var(--link-color);
+    margin: 16px 0;
+    transition: 0.2s;
+    border-radius: 50%;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .app-sidebar-link:hover {
+        background-color: var(--link-color-hover);
+        color: var(--link-color-active);
+    }
+
+    .app-sidebar-link.active {
+        background-color: var(--link-color-active-bg);
+        color: var(--link-color-active);
+    }
+
+:root {
+    --link-color: rgba(255,255,255,.8);
+    --link-color-hover: rgba(0, 0, 0, 0.247);
+    --link-color-active-bg: rgba(106, 110, 124, 0.116);
+}

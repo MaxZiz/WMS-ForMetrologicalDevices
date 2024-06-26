@@ -1,0 +1,50 @@
+﻿@model List<WMS.Domain.Entities.Device>
+@{
+    Layout = null;
+
+}
+<link rel="stylesheet" href="~/css/site.css" />
+
+<table cellpadding="0" cellspacing="0" border="0" id="table-container">
+    <thead>
+        <tr>
+            <th>Название </th>
+            <th>#</th>
+            <th>#</th>
+            <th>Тип прибора</th>
+            <th>Описание</th>
+            <th>Инвентарный номер</th>
+            <th>Дата создания</th>
+            <th>Кабинет</th>
+        </tr>
+    <tbody>
+            @if (Model != null)
+            {
+                foreach (var device in Model)
+                {
+                <tr id="allFacets">
+                    <td> <h5 class="card-title"> @device.Name</h5></td>
+                    <td>
+                        <button class="btn btn-success" onclick="openModal({ url: '/Device/GetDevice', data: '@device.Id' })">
+                            Открыть
+                        </button>
+                    </td>
+                    <td>
+                        <form asp-controller="Device" asp-action="Delete" asp-route-id="@device.Id" method="post">
+                            <button type="submit" class="btn btn-danger" id="del">
+                                УдалитьОхохоХехех
+                            </button>
+                        </form>
+                    </td>
+                    <td>@device.TypeDevice</td>
+                    <td>@device.Description</td>
+                    <td>@device.Id</td>
+                    <td>@device.DateCreate</td>
+                    <td>@device.PlaceId</td>
+                </tr>
+
+                }
+
+            }
+
+</table>

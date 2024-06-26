@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WMS.DAL\WMS.DAL.csproj" />
+    <ProjectReference Include="..\WMS.Domain\WMS.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

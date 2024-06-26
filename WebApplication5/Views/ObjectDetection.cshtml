@@ -1,0 +1,91 @@
+﻿
+@{
+    var textTitle = Model?.Id == null ? "Добавление данных" : "Изменение данных";
+    Layout = null;
+}
+<title> @textTitle</title>
+
+<form enctype="multipart/form-data" id="formSaveCar" method="post">
+    <div>@textTitle</div>
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label class="col-form-label">   Выберите помещение</label>
+            <select name="placeId" class="form-control" id="placeId"></select>
+        </div>
+    </div>
+    <div class="">
+        <div class="form-group ">
+            <label for="formFile" class="form-label">Изображение</label>
+            <input name="upload" class="form-control-file" type="file" id="exampleFormControlFile1">
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="form-group col-md-6">
+            using (Html.BeginForm("Upload", "Device", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" name="upload" />
+                <br>
+                <input type="submit" value="Загрузить" />
+            }
+        </div>
+    </div>-->
+
+
+    <div>
+        <input type="submit" value="Save-Отправить" style="margin-bottom:0;" />
+    </div>
+
+</form>
+
+
+<script src="~/lib/select2/js/select2.full.min.js"></script>
+<script>
+    $('#carTypeId').select2({
+        placeholder: "Выберите тип",
+        minimumInputLength: 0,
+        allowClear: true,
+        ajax: {
+            type: "POST",
+            url: "@Url.Action("GetTypes", "Device")",
+            dataType: "json",
+            processResults: function (result) {
+                return {
+                    results: $.map(result, function (val, index) {
+                        return {
+                            id: index,
+                            text: val
+                        };
+                    }),
+                };
+            }
+        }
+    });
+    $('#placeId').select2({
+        placeholder: "Выберите кабинет",
+        minimumInputLength: 0,
+        allowClear: true,
+        ajax: {
+            type: "POST",
+            url: "@Url.Action("GetPlaces", "Device")",
+            dataType: "json",
+            processResults: function (result) {
+                return {
+                    results: $.map(result, function (val, index) {
+                        return {
+                            id: index,
+                            text: index
+                        };
+                    }),
+                };
+            }
+        }
+    });
+
+</script>
+
+<style>
+    label {
+        color: black;
+    }
+</style>

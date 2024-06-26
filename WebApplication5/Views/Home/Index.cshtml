@@ -1,0 +1,350 @@
+﻿@model List<WMS.Domain.ViewModels.Index.IndexViewModel>
+@{
+
+    Layout = null; 
+        }
+
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/css/styleSecondIndex.css" />
+</head>
+<body style="background-color: #ecf9ff">
+    <div class="app" style="background-color:rgb(252,255,248)">
+        <header class="app-header">
+            <div class="app-header-logo">
+                <div class="logo">
+                                     
+                    </span>
+                    <h3 class="logo-title">
+                        <span style="color:black">Учёт</span>
+                        <span style="color:black">метрологического оборудования</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="app-header-navigation">
+                <div class="tabs">
+                    <a href="#">
+
+                    </a>
+                    <a href="#" class="active">
+
+                    </a>
+                    <a href="#">
+
+                    </a>
+                    <a href="#">
+
+                    </a>
+                    <a href="#">
+
+                    </a>
+                    <a href="#">
+                     
+                    </a>
+                </div>
+            </div>
+            <div class="app-header-actions" style="margin-left:68px">
+                <button class="user-profile" style="color:black; margin-right:10px">
+                    <span style="color:black; margin-left:20px">Зизевских М.А.</span>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="color:black" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                        </svg>
+                    </span>
+                </button>
+                <div class="app-header-actions-buttons" style="margin-left:50px">
+                   
+                    <button class="icon-button large">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                        </svg>
+                        <i class="ph-magnifying-glass"></i>
+                    </button>
+                    
+                </div>
+            </div>
+            <div class="app-header-mobile">
+                <button class="icon-button large">
+                    <i class="ph-list"></i>
+                </button>
+            </div>
+
+        </header>
+        <div class="app-body">
+            <div class="app-body-navigation" style="color:black">
+                <nav class="navigation" style="margin-top:24px" style="color:black">
+                   
+                    <a href="#">
+                        <i class="ph-check-square"></i>
+                        <span style="color:black">Помещения</span>
+                    </a>
+                    <a href="#">
+                        <i class="ph-swap"></i>
+                        <span style="color:black">Приборы</span>
+                    </a>
+                    <a href="#">
+                        <i class="ph-file-text"></i>
+                        <span style="color:black">История перемещений</span>
+                    </a>
+                    <a href="#">
+                        <i class="ph-globe"></i>
+                        <span style="color:black">Пользователи</span>
+                    </a>
+                    <a href="#">
+                        <i class="ph-browsers"></i>
+                        <span style="color:black">Наименования</span>
+                    </a>
+                    <a href="#">
+                        <i class="ph-browsers"></i>
+                        <span style="color:black">Задачи</span>
+                    </a>
+                </nav>
+                <footer class="footer">
+                    <h1 style="color:black">ЮУрГУ<small></small></h1>
+                    <div style="color:black">
+                        Кафедра ИнИТ<br />
+
+                    </div>
+                </footer>
+            </div>
+            <div class="app-body-main-content" style="color:black">
+                <section class="service-section">
+                    <h2></h2>
+                    <div class="service-section-header" style="color:black">
+                       
+                        <div class="search-field">
+                            <form asp-controller="Device" asp-action="GetDevicesFromSearch" enctype="multipart/form-data" method="post" style="display:contents">
+                                <i class="ph-magnifying-glass"></i>
+                                <input type="text" placeholder="" name="term" style="border-top:1px solid black; border-left: 1px solid black">
+                                <button class="flat-button" style="margin-left: 10px">
+                                    Поиск
+                                </button>
+                            </form>
+                         
+                        </div>                       
+                       
+                        
+                    </div>
+                    <div class="mobile-only">
+                        <button class="flat-button">
+                        </button>
+                    </div>
+                    <div class="tiles" style="color:black">
+                        <article class="tile">
+                            <div class="tile-header">
+                                <i class="ph-lightning-light"></i>
+                                <h3>
+                                    <span>Приборы</span>
+                                    <span></span>
+                                </h3>
+                            </div>
+                            <a asp-controller="Device" asp-action="GetDevices">
+                                <span>Перейти</span>
+                                <span class="icon-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-database-fill" viewBox="0 0 16 16">
+                                        <path d="M3.904 1.777C4.978 1.289 6.427 1 8 1s3.022.289 4.096.777C13.125 2.245 14 2.993 14 4s-.875 1.755-1.904 2.223C11.022 6.711 9.573 7 8 7s-3.022-.289-4.096-.777C2.875 5.755 2 5.007 2 4s.875-1.755 1.904-2.223" />
+                                        <path d="M2 6.161V7c0 1.007.875 1.755 1.904 2.223C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777C13.125 8.755 14 8.007 14 7v-.839c-.457.432-1.004.751-1.49.972C11.278 7.693 9.682 8 8 8s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
+                                        <path d="M2 9.161V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13s3.022-.289 4.096-.777C13.125 11.755 14 11.007 14 10v-.839c-.457.432-1.004.751-1.49.972-1.232.56-2.828.867-4.51.867s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
+                                        <path d="M2 12.161V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13v-.839c-.457.432-1.004.751-1.49.972-1.232.56-2.828.867-4.51.867s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
+                                    </svg>
+                                    <i class="ph-caret-right-bold"></i>
+                                </span>
+                            </a>
+                        </article>
+                        <article class="tile">
+                            <div class="tile-header">
+                                <i class="ph-fire-simple-light"></i>
+                                <h3>
+                                    <span>Помещения</span>
+                                    <span></span>
+                                </h3>
+                            </div>
+                            
+                            <a asp-controller="Place" asp-action="GetPlaces">
+                                <span>Перейти</span>
+                                <span class="icon-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-door-open" viewBox="0 0 16 16">
+                                        <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1" />
+                                        <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117M11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5M4 1.934V15h6V1.077z" />
+                                    </svg>
+                                    <i class="ph-caret-right-bold"></i>
+                                </span>
+                            </a>
+                        </article>
+                        <article class="tile">
+                            <div class="tile-header">
+                                <i class="ph-file-light">
+                                    
+                                </i>
+                                <h3>
+                                    <span>Загрузить изображение</span>
+                                    <span></span>
+                                </h3>
+                            </div>
+                            <a asp-controller ="ObjectDetection" asp-action="Create">
+                                <span>Перейти</span>
+                                <span class="icon-button">
+                                    <i class="ph-caret-right-bold"> </i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-download" viewBox="0 0 16 16">
+                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="service-section-footer">
+                        <p></p>
+                    </div>
+                </section>
+                <section class="transfer-section">
+                    <div class="transfer-section-header">
+                        <h2>Последние действия</h2>
+                        <div class="filter-options">
+                           
+                            <p></p>
+                             <a asp-controller ="Home" asp-action="GetHistories" class="icon-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-clock-history" viewBox="0 0 16 16">
+                                    <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z" />
+                                    <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z" />
+                                    <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5" />
+                                </svg>
+                                <i class="ph-funnel"></i>                                
+                            </a>
+                            Открыть историю перемещений
+                        </div>
+                    </div>
+                    <div class="transfers">
+                        <div class="transfer" style="margin-bottom: 0px; margin-top: 5px">
+                            <div class="transfer-logo">
+                                
+                            </div>
+                            <dl class="transfer-details">
+                                <div>
+                                   Наименование
+                                </div>
+                                <div>
+                                  Откуда
+                                </div>
+                                <div>
+                                    Куда
+                                </div>
+                                <div>
+                                   Пользователь
+                                </div>
+                                <div>
+                                    Дата
+                                </div>
+                            </dl>
+                            <div class="transfer-number">
+                            </div>
+                        </div>
+                        @foreach(var history in Model)
+                        {
+                            <div class="transfer" style="margin-bottom: 0px; margin-top: 5px">
+                                <div class="transfer-logo">
+                                    <img src= "~/imgs/9.png"/>
+                                </div>
+                                <dl class="transfer-details">
+                                    <div>
+                                        @history.Device.Name
+                                    </div>
+                                    <div>
+                                       @history.FromPlace
+                                    </div>
+                                    <div>
+                                        @history.ToPlace
+                                    </div>
+                                    <div>
+                                       @history.UserId
+                                    </div>
+                                    <div>
+                                        @history.DateTime
+                                    </div>
+                                </dl>
+                                <div class="transfer-number">
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </section>
+            </div>
+            <div class="app-body-sidebar" style="color:black">
+                <section class="payment-section" style="color:black">
+                    <h2 style="margin-bottom:0px">Предстоящие задачи</h2>
+                    
+                    <div class="payments" style="color:black">
+                        <div class="payment">
+                            <div class="card gray">
+                                <span>  30.05.2024</span>
+                                <span>
+                                  
+                                </span>
+                            </div>
+                            <div class="payment-details">
+                                <h3 style="margin-bottom:0px">Переместить</h3>
+                                <div style="margin-top:3px">
+                                    <span>Перейти к задаче</span>
+                                    <button class="icon-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5" />
+                                        </svg>
+                                        <i class="ph-caret-right-bold"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="payment">
+                            <div class="card olive">
+                                <span>    30.05.2024</span>
+                                <span>
+                                
+                                </span>
+                            </div>
+                            <div class="payment-details">
+                                <h3 style="margin-bottom:0px">Переместить</h3>
+                                <div style="margin-top:3px">
+                                    <span>Перейти к задаче</span>
+                                    <button class="icon-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5" />
+                                        </svg>
+                                        <i class="ph-caret-right-bold"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="payment">
+                            <div class="card gray">
+                                <span> 30.05.2024</span>
+                                <span>
+                                   
+                                </span>
+                            </div>
+                            <div class="payment-details">
+                                <h3 style="margin-bottom:0px">Переместить</h3>
+                                <div style="margin-top:3px">
+                                    <span>Перейти к задаче</span>
+                                    <button class="icon-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8m-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5" />
+                                        </svg>
+                                        <i class="ph-caret-right-bold"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

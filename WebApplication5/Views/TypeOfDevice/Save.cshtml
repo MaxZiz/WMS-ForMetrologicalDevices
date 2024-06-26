@@ -1,0 +1,34 @@
+﻿@model WMS.Domain.Entities.TypeOfDevice
+
+@{
+    var textTitle = Model?.Id == null ? "Добавление данных" : "Изменение данных";
+    Layout = null;
+}
+<title> @textTitle</title>
+
+<form asp-action="Save" enctype="multipart/form-data" id="formSaveCar">
+    <input asp-for="Id" hidden />
+    <div>@textTitle</div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Name" class="col-form-label"></label>
+            <input type="text" class="form-control" asp-for="@Model.Name">
+        </div>
+    </div>
+
+    <div class="row">
+    </div>
+
+    <div>
+        <input type="submit" value="Save-Отправить" style="margin-bottom:0;" />
+    </div>
+
+</form>
+
+
+
+<style>
+    label {
+        color: black;
+    }
+</style>

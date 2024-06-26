@@ -1,0 +1,28 @@
+﻿@model WMS.Domain.Entities.Place
+
+@{
+    Layout = null;
+}
+
+<form asp-action="Save" enctype="multipart/form-data">
+    <div class="row">       
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Number" class="col-form-label"></label>
+            <input class="form-control" asp-for="@Model.Number"/>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Отправить" class="btn btn-outline-success" />
+    </div>    
+</form>
+
+<style>
+    label {
+        color: black;
+    }
+</style>
+
+<script src="~/lib/select2/js/select2.full.min.js"></script>
+
+
+

@@ -1,0 +1,149 @@
+﻿@model WMS.Domain.ViewModels.DeviceViewModel
+
+@{
+    var textTitle = Model?.Id == null ? "Добавление данных" : "Изменение данных";
+    Layout = null;
+}
+<title> @textTitle</title>
+<style>
+    #formSaveCar {
+       width: 480px;
+   }
+   img :hover{
+
+   }
+   .l:hover{
+         transform: scale(3) translate(-108px, 0px);
+         
+   }
+   .r:hover{
+         transform: scale(3) translate(-200px, 0px);
+     
+         
+   }
+</style>
+<table class="table" style="background:white; position:absolute; margin-left:500px; color:black">
+    <p class="rounded-top" style="background:white; position:absolute; margin-left:500px; margin-top:-50px; color:black; width: 498px; padding-left:12px"> История перемещений</p>
+    <tr style="color:black"><th style="color:black">Пользователь</th><th style="color:black">Откуда</th><th style="color:black">Куда</th style="color:black"><th style="color:black">Дата</th></tr>
+    @foreach (var history in Model.Histories)
+    {
+        <tr style="color:black"><td style="color:black">@history.UserId</td><td style="color:black">@history.FromPlace</td><td style="color:black">@history.ToPlace</td><td style="color:black">@history.DateTime</td></tr>
+    }
+</table>
+<form asp-action="Save" enctype="multipart/form-data" id="formSaveCar">
+    <input asp-for="Id" hidden />
+    <div >Создал пользователь: Зизевских М.А. </div>
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Name" class="col-form-label">Наименование</label>
+            <input type="text" class="form-control" asp-for="@Model.Name" style="width:460px">
+        </div>
+     
+    </div>
+        <div class="row">
+        <div class="form-group col-md-6">
+            Изображение
+            <img src="/imgs/80.png" class="rounded float-left l" style="object-fit: fill; width:150px">
+        </div>
+         <div class="form-group col-md-6" >
+            Местоположение
+            <img src="/imgs/80.png" class="rounded float-left r" style="object-fit: fill; width:160px;">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label  class="col-form-label" style="width:200px">Находится в помещении: @Model.PlaceNumber</label>
+        </div>
+        <div class="form-group col-md-4" style="margin-left:70px">
+            <label asp-for="@Model.ToPlaceNumber" class="col-form-label" style="width:230px">Переместить в помещение</label>
+            <select asp-for="@Model.ToPlaceNumber" class="form-control" id="placeId"></select>
+        </div>
+    </div>
+    <div class="row">
+        <label  class="col-form-label form-group col-md-4">Класс точности 2,5</label>
+    </div>
+    <div>
+         <label asp-for="@Model.ToPlaceNumber" class="col-form-label">Дата последней поверки</label>
+        <input type="date"class="" value="2018-07-22">
+         <label asp-for="@Model.ToPlaceNumber" class="col-form-label">Дата последней калибровки</label>
+        <input type="date" class="" value="2018-07-22">
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.TypeDevice" class="col-form-label">Тип прибора</label>
+            <select asp-for="@Model.TypeDevice" class="form-control" id="carTypeId">@Model.TypeDevice</select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="formFile" class="col-form-label">Изображение местоположения прибора</label>
+            <input name="upload" class="form-control-file" type="file" id="exampleFormControlFile1" style="width:300px">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label asp-for="@Model.Description" class="col-form-label">Дополнительная информация</label>
+            <textarea type="text" class="form-control" asp-for="@Model.Description"></textarea>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Сохранить" class="btn btn-outline-success" style="margin-bottom:0;" />
+    </div>
+   
+</form>
+
+
+
+<script src="~/lib/select2/js/select2.full.min.js"></script>
+<script>
+    $('#carTypeId').select2({
+        placeholder: "Выберите тип",
+        minimumInputLength: 0,
+        allowClear: true,
+        ajax: {
+            type: "POST",
+            url: "@Url.Action("GetTypes", "Device")",
+            dataType: "json",
+            processResults: function (result) {
+                return {
+                    results: $.map(result, function (val, index) {
+                        return {
+                            id: index,
+                            text: val
+                        };
+                    }),
+                };
+            }
+        }
+    });
+    $('#placeId').select2({
+        placeholder: "Выберите помещение",
+        minimumInputLength: 0,
+        allowClear: true,
+        ajax: {
+            type: "POST",
+            url: "@Url.Action("GetPlaces", "Device")",
+            dataType: "json",
+            processResults: function (result) {
+                return {
+                    results: $.map(result, function (val, index) {
+                        return {
+                            id: index,
+                            text: index
+                        };
+                    }),
+                };
+            }
+        }
+    });
+
+</script>
+
+<style>
+    label {
+        color: black;
+    }
+</style>

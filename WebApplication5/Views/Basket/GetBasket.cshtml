@@ -1,0 +1,358 @@
+﻿@model WMS.Domain.Entities.Basket
+
+
+@{
+    //ViewBag.Title = "Список приборов";
+    Layout = "_Layout";
+}
+
+
+@{
+    var cardStyle = "col-md-12";
+    if (Model != null)
+    {
+      
+    }
+
+}
+<link rel="stylesheet" href="~/css/site.css" />
+<style>
+    body {
+        background: white;
+    }
+
+    .card-buttons-group {
+        text-align: right;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 30px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .tbl-header {
+        background-color: rgba(255,255,255,0.3);
+    }
+
+    .tbl-content {
+        height: 300px;
+        overflow-x: auto;
+        margin-top: 0px;
+        border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    th {
+        padding: 20px 15px;
+        text-align: left;
+        font-weight: 500;
+        font-size: 12px;
+        color: #fff;
+        text-transform: uppercase;
+    }
+
+    .ui-autocomplete {
+        z-index: 10000000;
+    }
+
+    .ui-helper-hidden-accessible {
+        display: none !important;
+    }
+
+    td {
+        padding: 15px;
+        text-align: left;
+        vertical-align: middle;
+        font-weight: 300;
+        font-size: 12px;
+        color: #fff;
+        border-bottom: solid 1px rgba(255,255,255,0.1);
+    }
+
+
+    /* demo styles */
+
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    section {
+        margin: 50px;
+    }
+
+
+    /* follow me template */
+    .made-with-love {
+        margin-top: 40px;
+        padding: 10px;
+        clear: left;
+        text-align: center;
+        font-size: 10px;
+        font-family: arial;
+        color: #fff;
+    }
+
+        .made-with-love i {
+            font-style: normal;
+            color: #F50057;
+            font-size: 14px;
+            position: relative;
+            top: 2px;
+        }
+
+        .made-with-love a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+            .made-with-love a:hover {
+                text-decoration: underline;
+            }
+
+
+    /* for custom scrollbar for webkit browser*/
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+</style>
+
+
+
+<!--<div class="ui-widget">
+    <label for="tags">Tags: </label>
+    <input id="tags">
+</div>-->
+
+<div class="modal fade" id="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+            <div class="modal-body"></div>
+            <button type="button" class="btn btn-close btn-secondary" data-dismiss="modal">Закрыть</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalWhButtons" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-close btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (User.Identity.IsAuthenticated) { }
+<!--for demo wrap-->
+<div class="shadow p-3 mb-5 bg-body rounded" style="color:black">
+    <div class="" style="margin-top:5px; margin-bottom:0px; background-color:#eeffed; padding:5px">
+        
+        <form asp-controller="Basket" asp-action="MoveDevices" method="post" style="display:inline-block">
+            <div class="form-inline">               
+                <select name="placeId" class="form-control" id="placeId1" style="margin-left:10px;width:180px;">
+                </select>
+                <input type="submit" value="Переместить приборы" class="btn btn-outline-secondary" style="margin-left:10px" />
+            </div>
+        </form>
+     
+        <form asp-controller="Basket" asp-action="ClearBasket" method="post" style="float:right;margin-right: 15px; ">
+            <button type="submit" class="btn btn-outline-danger" id="del">
+                Очистить список
+            </button>
+        </form>
+    </div>
+    <table style="" cellpadding="0" cellspacing="0" border="0" id="table-container" class="table table-hover table-striped table-bordered" style="color:black">
+        <thead class="thead-light">
+            <tr>
+
+                <th class="align-middle"><h6>Наименование</h6></th>
+                <th></th>
+                <th></th>
+                <th class="align-middle"><h6>Тип прибора</h6></th>
+                <th class="align-middle"><h6>Помещение</h6></th>
+                <th class="align-middle"><h6>Инвентарный номер</h6></th>
+                <th class="align-middle"><h6>Дата последнего изменения</h6></th>
+                <th></th>
+
+                <!-- <th>Кабинет <button id="delh">Click</button></th>-->
+            </tr>
+        <tbody style="color:black">
+                @if (Model != null)
+                {
+                    foreach (var device in Model.Devices)
+                    {
+                    <tr id="allFacets" style="color:black" class="align-middle">
+
+                        <td class="align-middle align-content-center"> <h5 class="card-title " style="color:black"> @device.Name</h5></td>
+                        <td class="align-middle">
+                            <button class="btn btn-outline-success" onclick="openModal({ url: '/Device/GetDevice', data: '@device.Id' })">
+                                Открыть
+                            </button>
+                        </td>
+                        <td class="align-middle">
+
+                            <form asp-controller="Device" asp-action="Delete" asp-route-id="@device.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger " id="del">
+                                    Удалить
+                                </button>
+                            </form>
+                        </td>
+
+                            @if (device.TypeDevice == WMS.Domain.Enums.TypeDevice.Device)
+                            {
+                            <td class="align-middle"><h5 style="color:black">Мультиметр</h5></td>
+                            }
+                            else if (device.TypeDevice == WMS.Domain.Enums.TypeDevice.Cables)
+                            {
+                            <td class="align-middle"><h5 style="color:black">Амперметр</h5></td>
+                            }
+                            else if (device.TypeDevice == WMS.Domain.Enums.TypeDevice.Voltage)
+                            {
+                            <td class="align-middle"><h5 style="color:black">Источник питания</h5></td>
+                            }
+                            else if (device.TypeDevice == WMS.Domain.Enums.TypeDevice.Other)
+                            {
+                            <td class="align-middle"><h5 style="color:black">Магазин сопротивлений</h5></td>
+
+                            }
+                        <td class="align-middle"><h5 style="color:black">@device.PlaceId</h5></td>
+                        <td class="align-middle"><h5 style="color:black">@device.Id</h5></td>
+                        <td class="align-middle"><h5 style="color:black">@device.DateCreate</h5></td>
+
+                        <td style="color:black">
+
+                            <form asp-controller="Basket" asp-action="DeleteFromBasket" asp-route-id="@device.Id" method="post">
+                                <button type="submit" class="btn btn-outline-dark">
+                                  Удалить из списка приборов
+                                </button>
+                            </form>
+                        </td>
+                        <!--<td></td>     <td></td>   -->
+                    </tr>
+
+                    }
+
+                }
+
+    </table>
+    @* rest of file with view *@
+
+    @if (ViewBag.Page > 0)
+    {
+        <a href="@Url.Action("GetDevices", new { page = ViewBag.Page - 1})"
+           class="btn btn-outline-success" style="margin-left: 15px; margin-bottom:5px">
+            Предыдущая страница
+        </a>
+    }
+    @if (ViewBag.Page < ViewBag.MaxPage)
+    {
+        <a href="@Url.Action("GetDevices", new { page = ViewBag.Page + 1 })"
+           class="btn btn-outline-success" style="margin-left: 15px; margin-bottom:5px">
+            Следующая страница
+        </a>
+    }
+</div>
+
+<script src="~/js/modal.js"></script>
+
+
+@section pageScripts {
+
+    <script src="~/js/modal.js"></script>
+    <script>
+        let modal = $('#modalWhButtons');
+
+        $("#btn-close").click(function () {
+            modal.modal('hide');
+        });
+
+        $('#addCarId').on('click', function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Device/Save',
+                success: function (response) {
+                    $('.modal-dialog').removeClass("modal-lg");
+                    modal.find(".modal-body").html(response);
+                    modal.modal('show')
+                },
+                failure: function () {
+                    modal.modal('hide')
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+
+        $('#placeId1').select2({
+            placeholder: "Выберите кабинет",
+            minimumInputLength: 0,
+            allowClear: true,
+            ajax: {
+                type: "POST",
+                url: "@Url.Action("GetPlaces", "Device")",
+                dataType: "json",
+                processResults: function (result) {
+                    return {
+                        results: $.map(result, function (val, index) {
+                            return {
+                                id: index,
+                                text: index
+                            };
+                        }),
+                    };
+                }
+            }
+        });
+
+        $("#tags").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "@Url.Action("GetPlaces", "Device")",
+                    dataType: "json",
+                    data: { q: request.term },
+                    success: function (data) {
+                        response($.map(data, function (value, key) {
+                            console.log(key + " " + key);
+                            return {
+                                label: key,
+                                value: key
+                            }
+                        }));
+                    }
+                });
+            },
+            minLength: 2
+        });
+
+
+
+
+
+    </script>
+
+
+}

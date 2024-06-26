@@ -1,0 +1,130 @@
+﻿@model WMS.Domain.ViewModels.DeviceViewModel
+
+@{
+    var textTitle = Model?.Id == null ? "Добавление данных" : "Изменение данных";
+    Layout = null;
+}
+<title> @textTitle</title>
+
+<form asp-action="Save" enctype="multipart/form-data" id="formSaveCar" method="post">
+    <input asp-for="Id" hidden />
+    <div>@textTitle</div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Name" class="col-form-label">Наименование</label>
+            <input type="text" class="form-control" asp-for="@Model.Name" style="width:460px">
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.PlaceNumber" class="col-form-label" style="width:200px">Номер помещения</label>
+            <select asp-for="@Model.PlaceNumber" class="form-control" id="placeId" style="width:180px"></select>
+        </div>
+        <div class="form-group col-md-4" style="margin-left: 30px">
+            <label asp-for="@Model.PlaceNumber" class="col-form-label" style="width:200px">Инвентарный номер</label>
+            <input type="text" class="form-control" style="width:180px">
+        </div>
+    </div>
+    <div class="row">
+        
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Name" class="col-form-label" style="width:200px">Класс точности прибора</label>
+            <input type="text" class="form-control" style="width:180px">
+        </div>
+        <div class="form-group col-md-6" style="margin-left: 30px">
+            <label asp-for="@Model.TypeDevice" class="col-form-label">Тип прибора</label>
+            <select asp-for="@Model.TypeDevice" class="form-control" id="carTypeId"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Name" class="col-form-label" style="width:200px">Межповерочный интервал, мес.</label>
+            <input type="text" class="form-control" style="width:180px">
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="formFile" class="col-form-label">Изображение прибора</label>
+            <input name="upload" class="form-control-file" type="file" id="exampleFormControlFile1" style="width:300px">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label asp-for="@Model.Description" class="col-form-label">Дополнительная информация</label>
+            <textarea type="text" class="form-control" asp-for="@Model.Description"></textarea>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="form-group col-md-6">
+            using (Html.BeginForm("Upload", "Device", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="file" name="upload" />
+                <br>
+                <input type="submit" value="Загрузить" />
+            }
+        </div>
+    </div>-->
+
+    
+    <div>
+        <input type="submit" value="Сохранить" class="btn btn-outline-success" style="margin-bottom:0;" />
+    </div>
+
+</form>
+
+
+<script src="~/lib/select2/js/select2.full.min.js"></script>
+<script>
+   $('#carTypeId').select2({
+      placeholder: "Выберите тип",
+      minimumInputLength: 0,
+      allowClear: true,
+      ajax: {
+           type: "POST",
+           url: "@Url.Action("GetTypes", "Device")",
+           dataType: "json",
+           processResults: function (result) {
+               return {
+                   results: $.map(result, function (val, index) {
+                       return {
+                           id: index,
+                           text: val
+                       };
+                   }),
+               };
+           }
+       }
+   });
+    $('#placeId').select2({
+        placeholder: "Выберите кабинет",
+        minimumInputLength: 0,
+        allowClear: true,
+        ajax: {
+            type: "POST",
+            url: "@Url.Action("GetPlaces", "Device")",
+            dataType: "json",
+            processResults: function (result) {
+                return {
+                    results: $.map(result, function (val, index) {
+                        return {
+                            id: index,
+                            text: index
+                        };
+                    }),
+                };
+            }
+        }
+    });
+
+</script>
+
+<style>
+    label {
+        color: black;
+    }
+</style>

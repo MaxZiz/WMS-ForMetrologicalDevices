@@ -1,0 +1,29 @@
+﻿@model WMS.Domain.ViewModels.LoginViewModel
+
+@{
+    Layout = null;
+    ViewBag.Title = "Вход в аккаунт";
+}
+
+<link rel="stylesheet" href="~/css/loginStyle.css" />
+
+<style> body{
+    background-color: white;
+}</style>
+
+
+<div class="login-box">
+    <h2 style="color:black">Вход</h2>
+    <form autocomplete="on" method="post" asp-controller="Account" asp-action="Login">
+        <div class="user-box">
+            <input asp-for="Name" placeholder="Логин" type="text" style="color:black">
+            <label></label>
+        </div>
+        <div class="user-box">
+            <input autocomplete="new-password" asp-for="Password" placeholder="Пароль" type="password" style="color:black">
+            <label></label>
+        </div>
+        <button class="">Войти</button>
+                
+    </form>
+</div>

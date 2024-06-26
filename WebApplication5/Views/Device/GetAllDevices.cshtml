@@ -1,0 +1,276 @@
+﻿@model List<WMS.Domain.Entities.Device>
+@{
+    ViewBag.Title = "Список приборов";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> @ViewData["Title"] - WMS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://raw.githack.com/ttskch/select2-bootstrap4-theme/master/dist/select2-bootstrap4.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/backImage.css" />
+    <link rel="stylesheet" href="~/css/menu.css" />
+    <link rel="stylesheet" href="~/css/paragraph.css" />
+    <link rel="stylesheet" href="~/css/card.css" />
+    <link rel="stylesheet" href="~/css/label.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="~/js/modal.js"></script>
+
+</head>
+<link rel="stylesheet" href="~/css/styleGetAll.css" />
+
+    <header>
+        <div class="divs">Суббота 25.03.2024</div>
+        <form class="searchForm" method="get">
+            <input class="inputSearch" name="s" placeholder="Искать здесь..." type="search">
+            <button class="searchButton" type="submit"></button>
+        </form>
+    <div class="profile">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+        </svg>
+    </div>
+    </header>
+    <div class="modal fade" id="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body"></div>
+                <button type="button" class="btn btn-close btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalWhButtons" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-close btn-secondary" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="app-sidebar">
+           
+            <a href="" class="app-sidebar-link active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+            </a>
+            <a href="" class="app-sidebar-link">
+                <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-pie-chart" viewBox="0 0 24 24">
+                    <defs />
+                    <path d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z" />
+                </svg>
+            </a>
+            <a href="" class="app-sidebar-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+            </a>
+            <a href="" class="app-sidebar-link">
+                <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-settings" viewBox="0 0 24 24">
+                    <defs />
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+                </svg>
+            </a>
+        </div>
+        <div class="card">
+
+            <table class="table">
+                Добавить прибор
+                <button class="main-header__add" id='addCarId'>
+                    <svg style="width: 14px" stroke-width="8px" fill="none" stroke="white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <line x1="50" x2="50" y1="0" y2="100" />
+                        <line x1="0" x2="100" y1="50" y2="50" />
+                    </svg>
+                </button>
+                <form method="get">
+                    <div class="form-inline">
+                        <label class="control-label">Тип прибора: </label>
+                        @Html.DropDownList("type", new SelectList(new List<string> { "Все", "Приборы", "Кабели", "Остальное" }) as SelectList,
+                                 htmlAttributes: new { @class = "form-control" })
+
+                        <select name="placeId" class="form-control" id="placeId1">
+                        </select>
+                        <input type="submit" value="Фильтр" class="btn btn-default" />
+                    </div>
+                </form>
+                <tr>
+                    <th>Название </th>
+                    <th>#</th>
+                    <th>#</th>
+                    <th>Тип прибора</th>
+                    <th>Описание</th>
+                    <th>Инвентарный номер</th>
+                    <th>Дата создания</th>
+                    <th>Кабинет</th>
+                </tr>
+                @if(Model !=null)
+                {
+                    @foreach (var device in Model)
+                    {
+                        <tr id="allFacets">
+
+                            <td> <h5 class="card-title"> @device.Name</h5></td>
+                            <td>
+                                <button class="main-header__edit" onclick="openModal({ url: '/Device/GetDevice', data: '@device.Id' })">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />
+                                    </svg>
+                                    <line x1="0" x2="100" y1="0" y2="100" />
+                                    <line x1="0" x2="100" y1="100" y2="0" />
+                                    Открыть
+                                </button>
+                            </td>
+                            <td>
+
+                                <form asp-controller="Device" asp-action="Delete" asp-route-id="@device.Id" method="post">
+                                    <button type="submit" class="main-header__delete" id="del">
+                                        <svg style="width: 14px" stroke-width="8px" fill="none" stroke="white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <line x1="0" x2="100" y1="0" y2="100" />
+                                            <line x1="0" x2="100" y1="100" y2="0" />
+                                        </svg>
+                                        Удалить
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+
+                                <form asp-controller="Basket" asp-action="AddToBasket" asp-route-id="@device.Id" method="post">
+                                    <button type="submit" class="btn btn-danger">
+                                        Добавить в корзину
+                                    </button>
+                                </form>
+                            </td>
+                            <td>@device.TypeDevice</td>
+                            <td>@device.Description</td>
+                            <td>@device.Id</td>
+                            <td>@device.DateCreate</td>
+                            <td>@device.PlaceId</td>
+                        </tr>
+
+                    }
+                }
+                            
+            </table>
+            @* rest of file with view *@
+
+            @if (ViewBag.Page > 0)
+            {
+                <a href="@Url.Action("GetDevices", new { page = ViewBag.Page - 1})"
+                   class="btn btn-default">
+                    Prev
+                </a>
+            }
+            @if (ViewBag.Page < ViewBag.MaxPage)
+            {
+                <a href="@Url.Action("GetDevices", new { page = ViewBag.Page + 1 })"
+                   class="btn btn-default">
+                    Next
+                </a>
+            }
+        </div>
+
+    </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script>-->
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script src="~/js/modal.js"></script>
+<script src="~/js/modal.js"></script>
+
+    <script src="~/js/modal.js"></script>
+    <script>
+        let modal = $('#modalWhButtons');
+
+        $("#btn-close").click(function () {
+            modal.modal('hide');
+        });
+
+        $('#addCarId').on('click', function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Device/Save',
+                success: function (response) {
+                    $('.modal-dialog').removeClass("modal-lg");
+                    modal.find(".modal-body").html(response);
+                    modal.modal('show')
+                },
+                failure: function () {
+                    modal.modal('hide')
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        });
+
+        $('#placeId1').select2({
+            placeholder: "Выберите кабинет",
+            minimumInputLength: 0,
+            allowClear: true,
+            ajax: {
+                type: "POST",
+                url: "@Url.Action("GetPlaces", "Device")",
+                dataType: "json",
+                processResults: function (result) {
+                    return {
+                        results: $.map(result, function (val, index) {
+                            return {
+                                id: index,
+                                text: index
+                            };
+                        }),
+                    };
+                }
+            }
+        });
+
+        $("#tags").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "@Url.Action("GetPlaces", "Device")",
+                    dataType: "json",
+                    data: { q: request.term },
+                    success: function (data) {
+                        response($.map(data, function (value, key) {
+                            console.log(key + " " + key);
+                            return {
+                                label: key,
+                                value: key
+                            }
+                        }));
+                    }
+                });
+            },
+            minLength: 2
+        });
+    </script>
+
+
